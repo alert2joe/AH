@@ -1,4 +1,5 @@
 # AH
+Use the function on data:
 ```sh
 $data = [
     'posts'=>[
@@ -63,54 +64,7 @@ $data = [
     ],
 ];
 ```
-Outputs:
-```sh
-Array
-(
-    [posts] => Array
-        (
-            [0] => Array
-                (
-                    [content] => p0
-                    [comments] => Array
-                        (
-                            [0] => Array
-                                (
-                                    [pageView] => 2
-                                    [userName] => sam wong !^_^
-                                )
 
-                            [1] => Array
-                                (
-                                    [pageView] => 3
-                                    [userName] => john li !^_^
-                                )
-
-                        )
-
-                    [userName] => joe lee
-                )
-
-            [1] => Array
-                (
-                    [content] => p1
-                    [comments] => Array
-                        (
-                            [0] => Array
-                                (
-                                    [pageView] => 10
-                                    [userName] => ken chan !^_^
-                                )
-
-                        )
-
-                    [userName] => zoe chan
-                )
-
-        )
-
-)
-```
 ## code
 ```sh
 $getUserName = function($v){
@@ -136,3 +90,46 @@ $addSmile = AH()->to('posts/#.*#/comments/#.*#/userName',function($v){return $v.
 
 pr($a->combine($addSmile)->getValue($data));
 ```
+
+Outputs:
+```sh
+Array
+(
+    [posts] => Array
+        (
+            [0] => Array
+                (
+                    [content] => p0
+                    [comments] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [pageView] => 2
+                                    [userName] => sam wong !^_^
+                                )
+
+                            [1] => Array
+                                (
+                                    [pageView] => 3
+                                    [userName] => john li !^_^
+                                )
+                        )
+                    [userName] => joe lee
+                )
+            [1] => Array
+                (
+                    [content] => p1
+                    [comments] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [pageView] => 10
+                                    [userName] => ken chan !^_^
+                                )
+                        )
+                    [userName] => zoe chan
+                )
+        )
+)
+```
+
