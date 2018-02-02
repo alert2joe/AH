@@ -1,5 +1,6 @@
 ## code
 ```sh
+<?php
 $getUserName = function($v){
     $v['userName'] = $v['author']['firstName'] .' '.$v['author']['lastName'];
     return $v;
@@ -22,10 +23,12 @@ $a = AH()
 $addSmile = AH()->to('posts/#.*#/comments/#.*#/userName',function($v){return $v.' !^_^';});
 
 print_r($a->combine($addSmile)->getValue($data));
+?>
 ```
 
 Use the function on data:
 ```sh
+<?php
 $data = [
     'posts'=>[
         ['content'=>'p0',
