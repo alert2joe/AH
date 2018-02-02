@@ -1,4 +1,29 @@
-# AH
+## code
+```sh
+$getUserName = function($v){
+    $v['userName'] = $v['author']['firstName'] .' '.$v['author']['lastName'];
+    return $v;
+};
+
+$a = AH()
+    ->to('posts',[  
+        AH()->filter( AH()->propEq('publish',true) ),
+        AH()->map([
+            $getUserName,
+            AH()->unpick(['pageView','author','publish'])])
+            ])
+    ->to('posts/#.*#/comments',[
+        AH()->take(2)->map([
+            $getUserName,
+            AH()->pick(['userName','pageView'])
+        ])
+    ]);
+    
+$addSmile = AH()->to('posts/#.*#/comments/#.*#/userName',function($v){return $v.' !^_^';});
+
+print_r($a->combine($addSmile)->getValue($data));
+```
+
 Use the function on data:
 ```sh
 $data = [
@@ -64,34 +89,7 @@ $data = [
     ],
 ];
 ```
-
-## code
-```sh
-$getUserName = function($v){
-    $v['userName'] = $v['author']['firstName'] .' '.$v['author']['lastName'];
-    return $v;
-};
-
-$a = AH()
-    ->to('posts',[  
-        AH()->filter( AH()->propEq('publish',true) ),
-        AH()->map([
-            $getUserName,
-            AH()->unpick(['pageView','author','publish'])])
-            ])
-    ->to('posts/#.*#/comments',[
-        AH()->take(2)->map([
-            $getUserName,
-            AH()->pick(['userName','pageView'])
-        ])
-    ]);
-    
-$addSmile = AH()->to('posts/#.*#/comments/#.*#/userName',function($v){return $v.' !^_^';});
-
-pr($a->combine($addSmile)->getValue($data));
-```
-
-Outputs:
+## Outputs:
 ```sh
 Array
 (
