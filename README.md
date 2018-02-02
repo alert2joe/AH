@@ -1,6 +1,4 @@
 # AH
-# Array handler
-
 ```sh
 $data = [
     'posts'=>[
